@@ -5,6 +5,7 @@
         public string Song { get; }
         public Lyrics()
         {
+
             Song = @"There was an old lady who swallowed a fly.
                 I don't know why she swallowed a fly - perhaps she'll die!
                 There was an old lady who swallowed a spider;
