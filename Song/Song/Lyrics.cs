@@ -7,6 +7,7 @@ namespace Song
     {
         private List<string> animalCollection;
         private readonly List<string> sectionList;
+        private readonly Dictionary<string, string> sectionDictionary;
 
         public string Song { get; }
         public Lyrics()
@@ -22,12 +23,16 @@ namespace Song
             };
             sectionList = new List<string>
             {
-                "That wriggled and wiggled and tickled inside her.\n",
+               
                 "How absurd to swallow a bird.\n",
                 "Fancy that to swallow a cat!\n",
                 "What a hog, to swallow a dog!\n",
                 "I don't know how she swallowed a cow!\n",              
             };
+
+            sectionDictionary = animalCollection.Skip(2).Take(sectionList.Count)
+                .Select((x, i) => new { index = i, animal = x })
+                .ToDictionary(k => k.animal, v => sectionList[v.index]);
 
             Song = ComposeSong();
                 
@@ -41,8 +46,7 @@ namespace Song
                 var animal = animalCollection[animalIndex];
                 var currSection =
                     BuildThereWasAnOldLadyWhoSwallowed(animal) +
-                    //GetMainSectionTheme(animal) +
-                    sectionList[i] + 
+                    GetMainSectionTheme(animal) +
                     GetSwallowedAllPrecedingAnimals(animal) +
                     GetDontKnowWhySheSwallowed(animalCollection.First());
                 joinedSections += currSection;
@@ -52,11 +56,12 @@ namespace Song
         }
         public string GetMainSectionTheme(string animal)
         {
+            
             if(GetPreviousAnimalIndex(animal) != 0)
             {
-
+                return sectionDictionary[animal];
             }
-            return string.Empty;
+            return "That wriggled and wiggled and tickled inside her.\n";
         }
         public string BuildThereWasAnOldLadyWhoSwallowed(string animal) =>
             $"There was an old lady who swallowed a {animal};\n";
