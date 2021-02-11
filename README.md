@@ -15,3 +15,10 @@ Refactor the code to allow for the customer's needs. Remember: refactoring can o
 to run the code
 >cd song
 >dotnet run
+
+Solucion de luis rovirosa
+https://github.com/luisrovirosa/sing-a-song/commits/master
+
+https://docs.google.com/presentation/d/1ZwrhP2K9ZjZgw6e3XxhSXXKeGAfG7Izo6DvKYI3uab0/edit?usp=sharing
+
+https://github.com/luisrovirosa/the-house-that-jack-built
