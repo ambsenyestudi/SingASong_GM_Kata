@@ -53,7 +53,8 @@ She swallowed the bird to catch the spider,
             for (int i = 0; i < sectionList.Count; i++)
             {
                 var animalIndex = i + 1;
-                var currSection = BuildThereWasAnOldLadyWhoSwallowed(animals[animalIndex]) +
+                var animal = animals[animalIndex];
+                var currSection = BuildThereWasAnOldLadyWhoSwallowed(animal) +
                     sectionList[i] + GetSwallowedTheSpiderToCatchTheFly() +
                     GetDontKnowWhySheSwallowedAFly();
                 joinedSections += currSection;
@@ -67,7 +68,14 @@ She swallowed the bird to catch the spider,
             GetDontKnowWhySheSwallowedAFly();
 
         public string GetDontKnowWhySheSwallowedAFly() => "I don't know why she swallowed a fly - perhaps she'll die!\n";
-        public string GetSwallowedTheSpiderToCatchTheFly() => "She swallowed the spider to catch the fly;\n";
+        public string GetSwallowedAnimalToCatchPreviousAnimal(string animal)
+        {
+            var previousAnimalIndex = animals.IndexOf(animal) - 1;
+            var previousAnimal = animals[previousAnimalIndex];
+            return $"She swallowed the {animal} to catch the {previousAnimal};\n";
+        }
+        public string GetSwallowedTheSpiderToCatchTheFly() => 
+            GetSwallowedAnimalToCatchPreviousAnimal(animals[1]);
 
         public string GetEnding() => "There was an old lady who swallowed a horse...\n" +
             "...She's dead, of course!";
