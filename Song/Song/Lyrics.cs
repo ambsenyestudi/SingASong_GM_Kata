@@ -50,14 +50,13 @@ She swallowed the bird to catch the spider,
         public string ComposeSong()
         {
             var joinedSections = GetStart();
-            var count = 1;
-            foreach (var section in sectionList)
+            for (int i = 0; i < sectionList.Count; i++)
             {
-                var currSection = BuildThereWasAnOldLadyWhoSwallowed(animals[count]) +
-                    section + GetSwallowedTheSpiderToCatchTheFly() +
+                var animalIndex = i + 1;
+                var currSection = BuildThereWasAnOldLadyWhoSwallowed(animals[animalIndex]) +
+                    sectionList[i] + GetSwallowedTheSpiderToCatchTheFly() +
                     GetDontKnowWhySheSwallowedAFly();
                 joinedSections += currSection;
-                count++;
             }
             joinedSections += GetEnding();
             return joinedSections;
