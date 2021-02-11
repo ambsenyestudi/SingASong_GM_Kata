@@ -1,26 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Song
 {
     public class Lyrics
     {
+        private const int ANIMAL_COUNT = 7;
         private List<string> animalCollection;
         private readonly List<string> sectionTemplateList;
         private readonly Dictionary<string, string> sectionDictionary;
 
         public string Song { get; }
-        public Lyrics()
+        public Lyrics(List<string> animalCollection)
         {
-            animalCollection = new List<string>{
-                "fly",
-                "spider",
-                "bird",
-                "cat",
-                "dog",
-                "cow",
-                "horse"
-            };
+            if(animalCollection.Count != ANIMAL_COUNT)
+            {
+                throw new ArgumentException($"{nameof(animalCollection)} must be {ANIMAL_COUNT} items long");
+            }
+            this.animalCollection = animalCollection;
             sectionTemplateList = new List<string>
             {
                 "How absurd to swallow a {0}.\n",

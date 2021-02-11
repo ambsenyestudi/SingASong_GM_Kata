@@ -1,5 +1,6 @@
 using ApprovalTests;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace Song.Test
@@ -9,7 +10,16 @@ namespace Song.Test
         [Fact]
         public void Test1()
         {
-            var sut = new Lyrics();
+            var animalCollection = new List<string>{
+                "fly",
+                "spider",
+                "bird",
+                "cat",
+                "dog",
+                "cow",
+                "horse"
+            };
+            var sut = new Lyrics(animalCollection);
             Approvals.Verify(sut.Song);
         }
     }

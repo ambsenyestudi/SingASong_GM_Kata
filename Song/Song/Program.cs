@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Song
 {
@@ -6,7 +7,16 @@ namespace Song
     {
         static void Main(string[] args)
         {
-            var lyrics = new Lyrics();
+            var animalCollection = new List<string>{
+                "fly",
+                "spider",
+                "bird",
+                "cat",
+                "dog",
+                "cow",
+                "horse"
+            };
+            var lyrics = new Lyrics(animalCollection);
 
             Console.WriteLine(lyrics.Song);
         }
