@@ -22,8 +22,7 @@ namespace Song
             };
             sectionList = new List<string>
             {
-                @$"There was an old lady who swallowed a fly.
-I don't know why she swallowed a fly - perhaps she'll die!
+                @$"I don't know why she swallowed a fly - perhaps she'll die!
 ",
                 @"There was an old lady who swallowed a spider;
 That wriggled and wiggled and tickled inside her.
@@ -59,9 +58,7 @@ She swallowed the cat to catch the bird,
 She swallowed the bird to catch the spider,
 She swallowed the spider to catch the fly;
 I don't know why she swallowed a fly - perhaps she'll die!
-",
-                @"There was an old lady who swallowed a horse...
-...She's dead, of course!"
+",              
             };
 
             Song = ComposeSong();
@@ -69,13 +66,17 @@ I don't know why she swallowed a fly - perhaps she'll die!
         }
         public string ComposeSong()
         {
-            var joinedSections = "";
+            var joinedSections = GetStart();
             foreach (var section in sectionList)
             {
                 joinedSections += section;
             }
+            joinedSections += GetEnding();
             return joinedSections;
         }
+        public string GetStart() => "There was an old lady who swallowed a fly.\n";
+        public string GetEnding() => "There was an old lady who swallowed a horse...\n" +
+            "...She's dead, of course!";
 
     }
 }
