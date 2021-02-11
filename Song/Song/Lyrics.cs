@@ -35,17 +35,28 @@ namespace Song
         public string ComposeSong()
         {
             var joinedSections = GetStart();
-            for (int i = 0; i < sectionList.Count; i++)
+            for (int i = 0; i < animalCollection.Count-2; i++)
             {
                 var animalIndex = i + 1;
                 var animal = animalCollection[animalIndex];
-                var currSection = BuildThereWasAnOldLadyWhoSwallowed(animal) +
-                    sectionList[i] + GetSwallowedAllPrecedingAnimals(animal) +
+                var currSection =
+                    BuildThereWasAnOldLadyWhoSwallowed(animal) +
+                    //GetMainSectionTheme(animal) +
+                    sectionList[i] + 
+                    GetSwallowedAllPrecedingAnimals(animal) +
                     GetDontKnowWhySheSwallowed(animalCollection.First());
                 joinedSections += currSection;
             }
             joinedSections += GetEnding();
             return joinedSections;
+        }
+        public string GetMainSectionTheme(string animal)
+        {
+            if(GetPreviousAnimalIndex(animal) != 0)
+            {
+
+            }
+            return string.Empty;
         }
         public string BuildThereWasAnOldLadyWhoSwallowed(string animal) =>
             $"There was an old lady who swallowed a {animal};\n";
