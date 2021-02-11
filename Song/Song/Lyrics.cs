@@ -22,26 +22,21 @@ namespace Song
             };
             sectionList = new List<string>
             {
-                @"There was an old lady who swallowed a spider;
-That wriggled and wiggled and tickled inside her.
+                @"That wriggled and wiggled and tickled inside her.
 ",
-                @"There was an old lady who swallowed a bird;
-How absurd to swallow a bird.
+                @"How absurd to swallow a bird.
 She swallowed the bird to catch the spider,
 ",
-                @"There was an old lady who swallowed a cat;
-Fancy that to swallow a cat!
+                @"Fancy that to swallow a cat!
 She swallowed the cat to catch the bird,
 She swallowed the bird to catch the spider,
 ",
-                @"There was an old lady who swallowed a dog;
-What a hog, to swallow a dog!
+                @"What a hog, to swallow a dog!
 She swallowed the dog to catch the cat,
 She swallowed the cat to catch the bird,
 She swallowed the bird to catch the spider,
 ",
-                @"There was an old lady who swallowed a cow;
-I don't know how she swallowed a cow!
+                @"I don't know how she swallowed a cow!
 She swallowed the cow to catch the dog,
 She swallowed the dog to catch the cat,
 She swallowed the cat to catch the bird,
@@ -55,15 +50,20 @@ She swallowed the bird to catch the spider,
         public string ComposeSong()
         {
             var joinedSections = GetStart();
+            var count = 1;
             foreach (var section in sectionList)
             {
-                var currSection = section + GetSwallowedTheSpiderToCatchTheFly() +
+                var currSection = BuildThereWasAnOldLadyWhoSwallowed(animals[count]) +
+                    section + GetSwallowedTheSpiderToCatchTheFly() +
                     GetDontKnowWhySheSwallowedAFly();
                 joinedSections += currSection;
+                count++;
             }
             joinedSections += GetEnding();
             return joinedSections;
         }
+        public string BuildThereWasAnOldLadyWhoSwallowed(string animal) =>
+            $"There was an old lady who swallowed a {animal};\n";
         public string GetStart() => "There was an old lady who swallowed a fly.\n" + 
             GetDontKnowWhySheSwallowedAFly();
 
