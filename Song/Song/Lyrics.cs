@@ -6,7 +6,7 @@ namespace Song
     public class Lyrics
     {
         private List<string> animalCollection;
-        private readonly List<string> sectionList;
+        private readonly List<string> sectionTemplateList;
         private readonly Dictionary<string, string> sectionDictionary;
 
         public string Song { get; }
@@ -21,18 +21,17 @@ namespace Song
                 "cow",
                 "horse"
             };
-            sectionList = new List<string>
+            sectionTemplateList = new List<string>
             {
-               
-                "How absurd to swallow a bird.\n",
-                "Fancy that to swallow a cat!\n",
-                "What a hog, to swallow a dog!\n",
-                "I don't know how she swallowed a cow!\n",              
+                "How absurd to swallow a {0}.\n",
+                "Fancy that to swallow a {0}!\n",
+                "What a hog, to swallow a {0}!\n",
+                "I don't know how she swallowed a {0}!\n",              
             };
 
-            sectionDictionary = animalCollection.Skip(2).Take(sectionList.Count)
+            sectionDictionary = animalCollection.Skip(2).Take(sectionTemplateList.Count)
                 .Select((x, i) => new { index = i, animal = x })
-                .ToDictionary(k => k.animal, v => sectionList[v.index]);
+                .ToDictionary(k => k.animal, v => sectionTemplateList[v.index]);
 
             Song = ComposeSong();
                 
@@ -59,7 +58,7 @@ namespace Song
             
             if(GetPreviousAnimalIndex(animal) != 0)
             {
-                return sectionDictionary[animal];
+                return string.Format(sectionDictionary[animal], animal);
             }
             return "That wriggled and wiggled and tickled inside her.\n";
         }
