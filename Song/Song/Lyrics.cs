@@ -22,16 +22,11 @@ namespace Song
             };
             sectionList = new List<string>
             {
-                @"That wriggled and wiggled and tickled inside her.
-",
-                @"How absurd to swallow a bird.
-",
-                @"Fancy that to swallow a cat!
-",
-                @"What a hog, to swallow a dog!
-",
-                @"I don't know how she swallowed a cow!
-",              
+                "That wriggled and wiggled and tickled inside her.\n",
+                "How absurd to swallow a bird.\n",
+                "Fancy that to swallow a cat!\n",
+                "What a hog, to swallow a dog!\n",
+                "I don't know how she swallowed a cow!\n",              
             };
 
             Song = ComposeSong();
@@ -46,7 +41,7 @@ namespace Song
                 var animal = animalCollection[animalIndex];
                 var currSection = BuildThereWasAnOldLadyWhoSwallowed(animal) +
                     sectionList[i] + GetSwallowedAllPrecedingAnimals(animal) +
-                    GetDontKnowWhySheSwallowedAFly();
+                    GetDontKnowWhySheSwallowed(animalCollection.First());
                 joinedSections += currSection;
             }
             joinedSections += GetEnding();
@@ -54,10 +49,10 @@ namespace Song
         }
         public string BuildThereWasAnOldLadyWhoSwallowed(string animal) =>
             $"There was an old lady who swallowed a {animal};\n";
-        public string GetStart() => "There was an old lady who swallowed a fly.\n" + 
-            GetDontKnowWhySheSwallowedAFly();
+        public string GetStart() => $"There was an old lady who swallowed a {animalCollection.First()}.\n" +
+            GetDontKnowWhySheSwallowed(animalCollection.First());
 
-        public string GetDontKnowWhySheSwallowedAFly() => "I don't know why she swallowed a fly - perhaps she'll die!\n";
+        public string GetDontKnowWhySheSwallowed(string animal) => $"I don't know why she swallowed a {animal} - perhaps she'll die!\n";
         public string GetSwallowedAllPrecedingAnimals(string animal)
         {
             var animalIndex = animalCollection.IndexOf(animal);
@@ -78,7 +73,7 @@ namespace Song
         public string GetSwallowedTheSpiderToCatchTheFly() => 
             GetSwallowedAnimalToCatchPreviousAnimal(animalCollection[1]);
 
-        public string GetEnding() => "There was an old lady who swallowed a horse...\n" +
+        public string GetEnding() => $"There was an old lady who swallowed a {animalCollection.Last()}...\n" +
             "...She's dead, of course!";
 
         public string GetPreviousAnimal(string animal) =>
