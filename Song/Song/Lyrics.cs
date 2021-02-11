@@ -71,11 +71,8 @@ namespace Song
         }
         public string GetSwallowedAnimalToCatchPreviousAnimal(string animal)
         {
-            var previousAnimalIndex = animalCollection.IndexOf(animal) - 1;
-            var previousAnimal = animalCollection[previousAnimalIndex];
-            var separator = previousAnimalIndex == 0
-                ? ";"
-                : ",";
+            var previousAnimal = GetPreviousAnimal(animal);
+            var separator = GetSeparatorFromAnimal(animal);
             return $"She swallowed the {animal} to catch the {previousAnimal}{separator}\n";
         }
         public string GetSwallowedTheSpiderToCatchTheFly() => 
@@ -83,6 +80,17 @@ namespace Song
 
         public string GetEnding() => "There was an old lady who swallowed a horse...\n" +
             "...She's dead, of course!";
+
+        public string GetPreviousAnimal(string animal) =>
+            animalCollection[GetPreviousAnimalIndex(animal)];
+
+        public int GetPreviousAnimalIndex(string animal) =>
+            animalCollection.IndexOf(animal) - 1;
+
+        public string GetSeparatorFromAnimal(string animal) =>
+            GetPreviousAnimalIndex(animal) == 0
+                ? ";"
+                : ",";
 
     }
 }
