@@ -19,7 +19,14 @@ namespace Song.Test
                 "cow",
                 "horse"
             };
-            var sut = new Lyrics(animalCollection);
+            var rymeDictionary = new Dictionary<string, string>
+            {
+                ["bird"] = "How absurd to",
+                ["cat"] = "Fancy that to",
+                ["dog"] = "What a hog, to",
+                ["cow"] = "I don't know how she"
+            };
+            var sut = new Lyrics(animalCollection, rymeDictionary);
             Approvals.Verify(sut.Song);
         }
     }

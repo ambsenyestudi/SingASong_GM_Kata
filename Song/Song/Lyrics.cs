@@ -8,32 +8,21 @@ namespace Song
     {
         private const int ANIMAL_COUNT = 7;
         private List<string> animalCollection;
-        private readonly List<string> sectionTemplateList;
-        private readonly Dictionary<string, string> sectionDictionary;
+        private readonly Dictionary<string, string> animalRymesDictionary;
 
         public string Song { get; }
-        public Lyrics(List<string> animalCollection)
+        public Lyrics(List<string> animalCollection, Dictionary<string, string> animalRymesDictionary)
         {
             if(animalCollection.Count != ANIMAL_COUNT)
             {
                 throw new ArgumentException($"{nameof(animalCollection)} must be {ANIMAL_COUNT} items long");
             }
             this.animalCollection = animalCollection;
-            sectionTemplateList = new List<string>
-            {
-                "How absurd to swallow a {0}.\n",
-                "Fancy that to swallow a {0}!\n",
-                "What a hog, to swallow a {0}!\n",
-                "I don't know how she swallowed a {0}!\n",              
-            };
-
-            sectionDictionary = animalCollection.Skip(2).Take(sectionTemplateList.Count)
-                .Select((x, i) => new { index = i, animal = x })
-                .ToDictionary(k => k.animal, v => sectionTemplateList[v.index]);
-
+            this.animalRymesDictionary = animalRymesDictionary;
             Song = ComposeSong();
                 
         }
+        
         public string ComposeSong()
         {
             var joinedSections = GetStart();
@@ -56,7 +45,13 @@ namespace Song
             
             if(GetPreviousAnimalIndex(animal) != 0)
             {
-                return string.Format(sectionDictionary[animal], animal);
+                var separator = animal == animalRymesDictionary.Keys.First()
+                    ? "."
+                    : "!";
+                var verb = animal == animalRymesDictionary.Keys.Last()
+                    ? "swallowed"
+                    : "swallow";
+                return $"{animalRymesDictionary[animal]} {verb} a {animal}{separator}\n";
             }
             return "That wriggled and wiggled and tickled inside her.\n";
         }
