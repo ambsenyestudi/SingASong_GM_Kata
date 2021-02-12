@@ -57,7 +57,7 @@ namespace Song
         
         public string BuildThereWasAnOldLadyWhoSwallowed(string animal) =>
             $"There was an old lady who swallowed a {animal};\n";
-        public string GetStart() => $"There was an old lady who swallowed a {animalCollection.First()}.\n" +
+        public string GetStart() => new FirstSentence(animalCollection.First(), ".").Value + "\n" +
             GetDontKnowWhySheSwallowed(animalCollection.First());
 
         public string GetDontKnowWhySheSwallowed(string animal) => $"I don't know why she swallowed a {animal} - perhaps she'll die!\n";
