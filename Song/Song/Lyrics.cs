@@ -57,18 +57,12 @@ namespace Song
 
         public string BuildThereWasAnOldLadyWhoSwallowed(string animal) => 
             new SectionOpening(animal).Value + "\n";
-        public string GetStart() =>
-            ComposeSection(animalCollection.First(), ".");
-            /*
-            new SectionOpening(animalCollection.First(), ".").Value + "\n" +
-            GetDontKnowWhySheSwallowed(animalCollection.First());
-            */
-
-        public string ComposeSection(string animal, string separator = ";")
-        {
-            var opening = new SectionOpening(animal, separator);
-            var ending = new SectionEnding(animal);
-            return ComposeSentences(opening.Value, ending.Value);
+        public string GetStart() {
+            var firstAnimal = animalCollection.First();
+            return Section.Create(
+                new SectionOpening(firstAnimal, "."),
+                new SectionEnding(firstAnimal))
+                .Value;
         }
 
         private string ComposeSentences(params string[] sentences) =>
