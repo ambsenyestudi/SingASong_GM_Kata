@@ -13,13 +13,30 @@ namespace Song
         }
         public override string ToString()
         {
-            return GetSwallowedAnimalToCatchPreviousAnimal(animalCollection.Last(),"");
+            var result = string.Empty;
+
+            var count = animalCollection.Count - 1;
+            var isPreciding = animalCollection.Count > 1; 
+
+            while(isPreciding && count > 0)
+            {
+                var currAnimal = animalCollection[count];
+                var currSentence = result == string.Empty
+                    ? GetSwallowedAnimalToCatchPreviousAnimal(currAnimal)
+                    : "\n" + GetSwallowedAnimalToCatchPreviousAnimal(currAnimal);
+                result += currSentence;
+                count--;
+                isPreciding = HasPredecessors(animalCollection[count]);
+            }
+            return result;
         }
-        private string GetSwallowedAnimalToCatchPreviousAnimal(string animal, string lineEnding = "\n")
+        private bool HasPredecessors(string animal) =>
+            animal != animalCollection.First();
+        private string GetSwallowedAnimalToCatchPreviousAnimal(string animal)
         {
             var previousAnimal = GetPreviousAnimal(animal);
             var separator = GetSeparatorFromAnimal(animal);
-            return $"She swallowed the {animal} to catch the {previousAnimal}{separator}{lineEnding}";
+            return $"She swallowed the {animal} to catch the {previousAnimal}{separator}";
         }
         private string GetPreviousAnimal(string animal) =>
             animalCollection[GetPreviousAnimalIndex(animal)];

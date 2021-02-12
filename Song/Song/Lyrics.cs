@@ -31,7 +31,7 @@ namespace Song
                 .ToList();
             for (int i = 1; i < composingAnimals.Count; i++)
             {
-                var processingAnimalList = composingAnimals.GetRange(0,i+1);
+                var processingAnimalList = composingAnimals.GetRange(0, i + 1);
                 var animal = composingAnimals[i];
                 var currSection = Section.Create(
                     new SectionOpening(animal),
@@ -43,15 +43,18 @@ namespace Song
             joinedSections += "\n" + GetEnding();
             return joinedSections;
         }
-        private string MiddleSection(string animal, List<string> animalCollection)
+        private string MiddleSection(string animal, List<string> animalCollection) =>
+            GetMainSectionTheme(animal) + new AnimalReviewSection(animalCollection).ToString();
+        /*
+    {
+
+        if(animalCollection.Count == 2)
         {
-            
-            if(animalCollection.Count == 2)
-            {
-                return GetMainSectionTheme(animal) + new AnimalReviewSection(animalCollection).ToString();
-            }
-            return GetMainSectionTheme(animal) + GetSwallowedAllPrecedingAnimals(animal);
+            return GetMainSectionTheme(animal) + new AnimalReviewSection(animalCollection).ToString();
         }
+        return GetMainSectionTheme(animal) + GetSwallowedAllPrecedingAnimals(animal);
+    }
+        */
         public string GetMainSectionTheme(string animal)
         {
             
