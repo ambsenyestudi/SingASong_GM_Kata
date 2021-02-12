@@ -46,16 +46,15 @@ namespace Song
             if(GetPreviousAnimalIndex(animal) != 0)
             {
                 var currRyme = animalRymeList.First(x => x.Animal == animal);
-                var separator = animal == animalRymeList.First().Animal
+                var separator = currRyme.Equals(animalRymeList.First())
                     ? "."
                     : "!";
-                var verb = animal == animalRymeList.Last().Animal
-                    ? "swallowed"
-                    : "swallow";
-                return $"{currRyme.Rhyme} {verb} a {animal}{separator}\n";
+                
+                return $"{currRyme.Value}{separator}\n";
             }
             return "That wriggled and wiggled and tickled inside her.\n";
         }
+        
         public string BuildThereWasAnOldLadyWhoSwallowed(string animal) =>
             $"There was an old lady who swallowed a {animal};\n";
         public string GetStart() => $"There was an old lady who swallowed a {animalCollection.First()}.\n" +
