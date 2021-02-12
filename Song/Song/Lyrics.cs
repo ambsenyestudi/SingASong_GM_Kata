@@ -25,7 +25,7 @@ namespace Song
         
         public string ComposeSong()
         {
-            var joinedSections = GetStart();
+            var joinedSections = GetStart()+"\n";
             for (int i = 0; i < animalCollection.Count-2; i++)
             {
                 var animalIndex = i + 1;
@@ -54,11 +54,25 @@ namespace Song
             }
             return "That wriggled and wiggled and tickled inside her.\n";
         }
-        
-        public string BuildThereWasAnOldLadyWhoSwallowed(string animal) =>
-            $"There was an old lady who swallowed a {animal};\n";
-        public string GetStart() => new FirstSentence(animalCollection.First(), ".").Value + "\n" +
+
+        public string BuildThereWasAnOldLadyWhoSwallowed(string animal) => 
+            new SectionOpening(animal).Value + "\n";
+        public string GetStart() =>
+            ComposeSection(animalCollection.First(), ".");
+            /*
+            new SectionOpening(animalCollection.First(), ".").Value + "\n" +
             GetDontKnowWhySheSwallowed(animalCollection.First());
+            */
+
+        public string ComposeSection(string animal, string separator = ";")
+        {
+            var opening = new SectionOpening(animal, separator);
+            var ending = new SectionEnding(animal);
+            return ComposeSentences(opening.Value, ending.Value);
+        }
+
+        private string ComposeSentences(params string[] sentences) =>
+            string.Join("\n", sentences);
 
         public string GetDontKnowWhySheSwallowed(string animal) => $"I don't know why she swallowed a {animal} - perhaps she'll die!\n";
         public string GetSwallowedAllPrecedingAnimals(string animal)
