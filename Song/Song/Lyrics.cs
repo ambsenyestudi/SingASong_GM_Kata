@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Song.Sections;
+using Songs.SharedKernel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -31,47 +33,29 @@ namespace Song
                 .ToList();
             for (int i = 1; i < composingAnimals.Count; i++)
             {
-                var processingAnimalList = composingAnimals.GetRange(0, i + 1);
                 var animal = composingAnimals[i];
-                var currSection = Section.Create(
-                    new SectionOpening(animal),
-                     GetMainSectionTheme(animal),
-                     new AnimalReviewSection(processingAnimalList),
-                     new SectionEnding(animalCollection.First())
-                    );
+                var currRhyme = animalRymeList.FirstOrDefault(x => x.Animal == animal);
+                if(currRhyme == null)
+                {
+                    currRhyme = AnimalRhyme.Empty;
+                }
+                var processingAnimalList = composingAnimals.GetRange(0, i + 1);
+                var currSection = currRhyme.Equals(animalRymeList.First())
+                    ? Section.Create(processingAnimalList, currRhyme, ".")
+                    : Section.Create(processingAnimalList, currRhyme);
                 joinedSections += "\n" + currSection.Value;
             }
             joinedSections += "\n" + new LyricsEnding(animalCollection.Last()).Value;
             return joinedSections;
         }
 
-        public string GetMainSectionTheme(string animal)
-        {
-            
-            if(GetPreviousAnimalIndex(animal) != 0)
-            {
-                var currRyme = animalRymeList.First(x => x.Animal == animal);
-                var separator = currRyme.Equals(animalRymeList.First())
-                    ? "."
-                    : "!";
-                
-                return $"{currRyme.Value}{separator}\n";
-            }
-            return "That wriggled and wiggled and tickled inside her.\n";
-        }
 
-        public string BuildThereWasAnOldLadyWhoSwallowed(string animal) => 
-            new SectionOpening(animal).Value + "\n";
         public string GetStart() {
             var firstAnimal = animalCollection.First();
-            return Section.Create(
-                new SectionOpening(firstAnimal, "."),
-                new SectionEnding(firstAnimal))
+            return Section.Create(firstAnimal)
                 .Value;
         }        
 
-        public int GetPreviousAnimalIndex(string animal) =>
-            animalCollection.IndexOf(animal) - 1;
 
 
     }

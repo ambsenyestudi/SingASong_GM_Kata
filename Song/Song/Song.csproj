@@ -9,4 +9,9 @@
     <PackageReference Include="ApprovalTests" Version="5.4.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Song.Sections\Song.Sections.csproj" />
+    <ProjectReference Include="..\Songs.SharedKernel\Songs.SharedKernel.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Song
+namespace Song.Sections
 {
-    public class AnimalReviewSection
+    internal class AnimalReviewSection
     {
         private readonly List<string> animalCollection;
 
@@ -16,9 +16,9 @@ namespace Song
             var result = string.Empty;
 
             var count = animalCollection.Count - 1;
-            var isPreciding = animalCollection.Count > 1; 
+            var isPreciding = animalCollection.Count > 1;
 
-            while(isPreciding && count > 0)
+            while (isPreciding && count > 0)
             {
                 var currAnimal = animalCollection[count];
                 var currSentence = result == string.Empty

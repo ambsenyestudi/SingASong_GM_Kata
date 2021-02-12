@@ -1,4 +1,4 @@
-﻿namespace Song
+﻿namespace Songs.SharedKernel
 {
     public enum VerbTenses
     {

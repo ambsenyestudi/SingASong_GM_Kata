@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Songs.SharedKernel;
+using System.Collections.Generic;
 
-namespace Song
+namespace Song.Sections
 {
-    public class SectionEnding : ValueObject
+    internal class SectionEnding : ValueObject
     {
-        public string Value { get; }
+        internal string Value { get; }
         private const string prefix = "I don't know why she swallowed a";
         private const string sufix = "- perhaps she'll die!";
 
-        public SectionEnding(string  animal)
+        internal SectionEnding(string animal)
         {
             Value = $"{prefix} {animal} {sufix}";
         }

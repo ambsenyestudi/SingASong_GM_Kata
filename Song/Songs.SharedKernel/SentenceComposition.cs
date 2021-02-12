@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Song
+namespace Songs.SharedKernel
 {
-    public class SentenceComposition: ValueObject
+    public class SentenceComposition : ValueObject
     {
         public string Value { get; }
         protected SentenceComposition(string value)

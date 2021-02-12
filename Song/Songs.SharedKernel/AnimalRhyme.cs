@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Song
+namespace Songs.SharedKernel
 {
-    public class AnimalRhyme: ValueObject
+    public class AnimalRhyme : ValueObject
     {
         public static AnimalRhyme Empty { get; } = new AnimalRhyme(string.Empty, string.Empty);
         public string Animal { get; }
@@ -14,13 +14,14 @@ namespace Song
             Animal = animal;
             Value = value;
         }
-        
+
 
         protected override IEnumerable<object> GetEqualityComponents() =>
             new object[] { Animal, Rhyme, VerbTense };
 
-        
-        private static string CreatPresentRhyme(string animal, string rhyme) {
+
+        private static string CreatPresentRhyme(string animal, string rhyme)
+        {
             var preposition = animal.StartsWith('a') || animal.StartsWith('A')
                 ? "an"
                 : "a";
@@ -35,7 +36,7 @@ namespace Song
         }
         private static AnimalRhyme CreatFromVerbTens(string animal, string rhyme, VerbTenses verbTense)
         {
-            if(verbTense == VerbTenses.Present)
+            if (verbTense == VerbTenses.Present)
                 return new AnimalRhyme(animal, CreatPresentRhyme(animal, rhyme));
             if (verbTense == VerbTenses.Past)
                 return new AnimalRhyme(animal, CreatPastRhyme(animal, rhyme));

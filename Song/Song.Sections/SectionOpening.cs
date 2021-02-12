@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using Songs.SharedKernel;
+using System.Collections.Generic;
 
-namespace Song
+namespace Song.Sections
 {
-    public class SectionOpening: ValueObject
+    internal class SectionOpening : ValueObject
     {
         private const string TEXT = "There was an old lady who swallowed a ";
-        public string Value { get; }
-        public SectionOpening(string animal, string separtor = ";")
+        internal string Value { get; }
+        internal SectionOpening(string animal, string separtor = ";")
         {
             Value = TEXT + animal + separtor;
         }
