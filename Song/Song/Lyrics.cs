@@ -27,19 +27,30 @@ namespace Song
         {
             var joinedSections = GetStart();
             var composingAnimals = animalCollection
-                .Skip(1)
-                .Take(animalCollection.Count - 2);
-            foreach (var animal in composingAnimals)
+                .Take(animalCollection.Count - 1)
+                .ToList();
+            for (int i = 1; i < composingAnimals.Count; i++)
             {
+                var processingAnimalList = composingAnimals.GetRange(0,i+1);
+                var animal = composingAnimals[i];
                 var currSection = Section.Create(
                     new SectionOpening(animal),
-                     GetMainSectionTheme(animal) + GetSwallowedAllPrecedingAnimals(animal),
+                     MiddleSection(animal, processingAnimalList),
                      new SectionEnding(animalCollection.First())
                     );
                 joinedSections += "\n" + currSection.Value;
             }
             joinedSections += "\n" + GetEnding();
             return joinedSections;
+        }
+        private string MiddleSection(string animal, List<string> animalCollection)
+        {
+            
+            if(animalCollection.Count == 2)
+            {
+                return GetMainSectionTheme(animal) + new AnimalReviewSection(animalCollection).ToString();
+            }
+            return GetMainSectionTheme(animal) + GetSwallowedAllPrecedingAnimals(animal);
         }
         public string GetMainSectionTheme(string animal)
         {
@@ -65,11 +76,6 @@ namespace Song
                 new SectionEnding(firstAnimal))
                 .Value;
         }
-
-        private string ComposeSentences(params string[] sentences) =>
-            string.Join("\n", sentences);
-
-        public string GetDontKnowWhySheSwallowed(string animal) => $"I don't know why she swallowed a {animal} - perhaps she'll die!\n";
         public string GetSwallowedAllPrecedingAnimals(string animal)
         {
             var animalIndex = animalCollection.IndexOf(animal);
