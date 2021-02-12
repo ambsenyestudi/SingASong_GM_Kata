@@ -8,7 +8,7 @@ namespace Song.Test
     public class SongShould
     {
         [Fact]
-        public void Test1()
+        public void HaveLyrics()
         {
             var animalCollection = new List<string>{
                 "fly",

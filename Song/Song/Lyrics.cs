@@ -81,8 +81,7 @@ namespace Song
         public string GetSwallowedTheSpiderToCatchTheFly() => 
             GetSwallowedAnimalToCatchPreviousAnimal(animalCollection[1]);
 
-        public string GetEnding() => $"There was an old lady who swallowed a {animalCollection.Last()}...\n" +
-            "...She's dead, of course!";
+        public string GetEnding() => new LyricsEnding(animalCollection.Last()).Value;
 
         public string GetPreviousAnimal(string animal) =>
             animalCollection[GetPreviousAnimalIndex(animal)];
