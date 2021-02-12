@@ -35,26 +35,16 @@ namespace Song
                 var animal = composingAnimals[i];
                 var currSection = Section.Create(
                     new SectionOpening(animal),
-                     MiddleSection(animal, processingAnimalList),
+                     GetMainSectionTheme(animal),
+                     new AnimalReviewSection(processingAnimalList),
                      new SectionEnding(animalCollection.First())
                     );
                 joinedSections += "\n" + currSection.Value;
             }
-            joinedSections += "\n" + GetEnding();
+            joinedSections += "\n" + new LyricsEnding(animalCollection.Last()).Value;
             return joinedSections;
         }
-        private string MiddleSection(string animal, List<string> animalCollection) =>
-            GetMainSectionTheme(animal) + new AnimalReviewSection(animalCollection).ToString();
-        /*
-    {
 
-        if(animalCollection.Count == 2)
-        {
-            return GetMainSectionTheme(animal) + new AnimalReviewSection(animalCollection).ToString();
-        }
-        return GetMainSectionTheme(animal) + GetSwallowedAllPrecedingAnimals(animal);
-    }
-        */
         public string GetMainSectionTheme(string animal)
         {
             
@@ -78,41 +68,11 @@ namespace Song
                 new SectionOpening(firstAnimal, "."),
                 new SectionEnding(firstAnimal))
                 .Value;
-        }
-        public string GetSwallowedAllPrecedingAnimals(string animal)
-        {
-            var animalIndex = animalCollection.IndexOf(animal);
-            var result = "";
-            while (animalIndex > 0)
-            {
-                result += animalIndex == 1
-                    ? GetSwallowedAnimalToCatchPreviousAnimal(animalCollection[animalIndex], "")
-                    : GetSwallowedAnimalToCatchPreviousAnimal(animalCollection[animalIndex]);
-                animalIndex--;
-            }
-            return result;
-        }
-        public string GetSwallowedAnimalToCatchPreviousAnimal(string animal, string lineEnding="\n")
-        {
-            var previousAnimal = GetPreviousAnimal(animal);
-            var separator = GetSeparatorFromAnimal(animal);
-            return $"She swallowed the {animal} to catch the {previousAnimal}{separator}{lineEnding}";
-        }
-        public string GetSwallowedTheSpiderToCatchTheFly() => 
-            GetSwallowedAnimalToCatchPreviousAnimal(animalCollection[1]);
-
-        public string GetEnding() => new LyricsEnding(animalCollection.Last()).Value;
-
-        public string GetPreviousAnimal(string animal) =>
-            animalCollection[GetPreviousAnimalIndex(animal)];
+        }        
 
         public int GetPreviousAnimalIndex(string animal) =>
             animalCollection.IndexOf(animal) - 1;
 
-        public string GetSeparatorFromAnimal(string animal) =>
-            GetPreviousAnimalIndex(animal) == 0
-                ? ";"
-                : ",";
 
     }
 }

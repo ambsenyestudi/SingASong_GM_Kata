@@ -19,5 +19,15 @@
         {
             return new Section(opening, ending, text);
         }
+        public static Section Create(SectionOpening opening, string text, AnimalReviewSection animalReview, SectionEnding ending)
+        {
+            var texRev = text + animalReview.ToString();
+            return new Section(opening, ending, texRev);
+        }
+        public static Section Create(SectionOpening opening, AnimalRhyme rime, AnimalReviewSection animalReview, SectionEnding ending)
+        {
+            var texRev = rime.Value + "\n" + animalReview.ToString();
+            return new Section(opening, ending, texRev);
+        }
     }
 }
