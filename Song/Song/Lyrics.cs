@@ -25,19 +25,20 @@ namespace Song
         
         public string ComposeSong()
         {
-            var joinedSections = GetStart()+"\n";
-            for (int i = 0; i < animalCollection.Count-2; i++)
+            var joinedSections = GetStart();
+            var composingAnimals = animalCollection
+                .Skip(1)
+                .Take(animalCollection.Count - 2);
+            foreach (var animal in composingAnimals)
             {
-                var animalIndex = i + 1;
-                var animal = animalCollection[animalIndex];
-                var currSection =
-                    BuildThereWasAnOldLadyWhoSwallowed(animal) +
-                    GetMainSectionTheme(animal) +
-                    GetSwallowedAllPrecedingAnimals(animal) +
-                    GetDontKnowWhySheSwallowed(animalCollection.First());
-                joinedSections += currSection;
+                var currSection = Section.Create(
+                    new SectionOpening(animal),
+                     GetMainSectionTheme(animal) + GetSwallowedAllPrecedingAnimals(animal),
+                     new SectionEnding(animalCollection.First())
+                    );
+                joinedSections += "\n" + currSection.Value;
             }
-            joinedSections += GetEnding();
+            joinedSections += "\n" + GetEnding();
             return joinedSections;
         }
         public string GetMainSectionTheme(string animal)
@@ -75,16 +76,18 @@ namespace Song
             var result = "";
             while (animalIndex > 0)
             {
-                result += GetSwallowedAnimalToCatchPreviousAnimal(animalCollection[animalIndex]);
+                result += animalIndex == 1
+                    ? GetSwallowedAnimalToCatchPreviousAnimal(animalCollection[animalIndex], "")
+                    : GetSwallowedAnimalToCatchPreviousAnimal(animalCollection[animalIndex]);
                 animalIndex--;
             }
             return result;
         }
-        public string GetSwallowedAnimalToCatchPreviousAnimal(string animal)
+        public string GetSwallowedAnimalToCatchPreviousAnimal(string animal, string lineEnding="\n")
         {
             var previousAnimal = GetPreviousAnimal(animal);
             var separator = GetSeparatorFromAnimal(animal);
-            return $"She swallowed the {animal} to catch the {previousAnimal}{separator}\n";
+            return $"She swallowed the {animal} to catch the {previousAnimal}{separator}{lineEnding}";
         }
         public string GetSwallowedTheSpiderToCatchTheFly() => 
             GetSwallowedAnimalToCatchPreviousAnimal(animalCollection[1]);
