@@ -19,14 +19,15 @@ namespace Song.Test
                 "cow",
                 "horse"
             };
-            var rymeDictionary = new Dictionary<string, string>
+            var rymeList = new List<AnimalRhyme>
             {
-                ["bird"] = "How absurd to",
-                ["cat"] = "Fancy that to",
-                ["dog"] = "What a hog, to",
-                ["cow"] = "I don't know how she"
+                AnimalRhyme.CreatePresentTenseRhyme("bird", "How absurd to"),
+                AnimalRhyme.CreatePresentTenseRhyme("cat", "Fancy that to"),
+                AnimalRhyme.CreatePresentTenseRhyme("dog", "What a hog, to"),
+                AnimalRhyme.CreatePastTenseRhyme("cow", "I don't know how she")
             };
-            var sut = new Lyrics(animalCollection, rymeDictionary);
+            var lyrics = new Lyrics(animalCollection, rymeList);
+            var sut = new Lyrics(animalCollection, rymeList);
             Approvals.Verify(sut.Song);
         }
     }

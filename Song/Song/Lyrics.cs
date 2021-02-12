@@ -8,17 +8,17 @@ namespace Song
     {
         private const int ANIMAL_COUNT = 7;
         private List<string> animalCollection;
-        private readonly Dictionary<string, string> animalRymesDictionary;
+        private readonly List<AnimalRhyme> animalRymeList;
 
         public string Song { get; }
-        public Lyrics(List<string> animalCollection, Dictionary<string, string> animalRymesDictionary)
+        public Lyrics(List<string> animalCollection, List<AnimalRhyme> animalRymeList)
         {
             if(animalCollection.Count != ANIMAL_COUNT)
             {
                 throw new ArgumentException($"{nameof(animalCollection)} must be {ANIMAL_COUNT} items long");
             }
             this.animalCollection = animalCollection;
-            this.animalRymesDictionary = animalRymesDictionary;
+            this.animalRymeList = animalRymeList;
             Song = ComposeSong();
                 
         }
@@ -45,13 +45,14 @@ namespace Song
             
             if(GetPreviousAnimalIndex(animal) != 0)
             {
-                var separator = animal == animalRymesDictionary.Keys.First()
+                var currRyme = animalRymeList.First(x => x.Animal == animal);
+                var separator = animal == animalRymeList.First().Animal
                     ? "."
                     : "!";
-                var verb = animal == animalRymesDictionary.Keys.Last()
+                var verb = animal == animalRymeList.Last().Animal
                     ? "swallowed"
                     : "swallow";
-                return $"{animalRymesDictionary[animal]} {verb} a {animal}{separator}\n";
+                return $"{currRyme.Rhyme} {verb} a {animal}{separator}\n";
             }
             return "That wriggled and wiggled and tickled inside her.\n";
         }
