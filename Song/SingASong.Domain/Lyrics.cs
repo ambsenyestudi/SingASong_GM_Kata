@@ -34,7 +34,7 @@ namespace SingASong.Domain
 
             var sectionList = new List<Section>()
             {
-                GetOpening()
+                OpeningSection.Create(animalCollection.First())
             };
 
             for (int i = 1; i < composingAnimals.Count; i++)
@@ -57,11 +57,6 @@ namespace SingASong.Domain
         }
 
 
-        public Section GetOpening()
-        {
-            var firstAnimal = animalCollection.First();
-            return Section.Create(firstAnimal);
-        }
         private List<string> GetSectionsSentences(List<Section> sectionList) =>
             sectionList.SelectMany(sec => sec.SentenceList)
             .ToList();
