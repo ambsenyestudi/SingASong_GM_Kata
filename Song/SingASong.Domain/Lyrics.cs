@@ -1,5 +1,5 @@
-﻿using Song.Sections;
-using Songs.SharedKernel;
+﻿using SingASong.SharedKernel;
+using Song.Sections;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Song.Test", "Song.Test\Song
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Song.Sections", "Song.Sections\Song.Sections.csproj", "{0C9B01FF-63C0-4826-B761-8C861EF42B2B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Songs.SharedKernel", "Songs.SharedKernel\Songs.SharedKernel.csproj", "{1E470907-A11B-4F0A-9C55-8C69D8AF7A5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SingASong.SharedKernel", "Songs.SharedKernel\SingASong.SharedKernel.csproj", "{1E470907-A11B-4F0A-9C55-8C69D8AF7A5B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingASong.Domain", "SingASong.Domain\SingASong.Domain.csproj", "{C948DEF2-0F89-4FB1-8D69-670BE4362936}"
 EndProject

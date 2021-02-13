@@ -1,4 +1,4 @@
-﻿using Songs.SharedKernel;
+﻿using SingASong.SharedKernel;
 using System.Collections.Generic;
 
 namespace Song.Sections

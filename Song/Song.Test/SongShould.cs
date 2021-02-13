@@ -1,5 +1,5 @@
 using ApprovalTests;
-using Songs.SharedKernel;
+using SingASong.SharedKernel;
 using System;
 using System.Collections.Generic;
 using Xunit;

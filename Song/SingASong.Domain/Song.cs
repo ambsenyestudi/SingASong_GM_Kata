@@ -1,4 +1,4 @@
-﻿using Songs.SharedKernel;
+﻿using SingASong.SharedKernel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,16 +56,16 @@ namespace SingASong.Domain
 
         private bool IsUnkownAnimalInRhyme(List<AnimalRhyme> animalRymeList)=>
             animalRymeList
-            .All(an => animalRymeList.Contains(an));
+            .Any(an => !animalRymeList.Contains(an));
 
-        private void CheckAnimalList(List<string> animalList)
+        private void CheckAnimalList(List<string> checkingAnimalList)
         {
-            if(animalList == null || IsEmpty(animalList))
+            if(checkingAnimalList == null || IsEmpty(checkingAnimalList))
             {
-                throw new ArgumentException($"{nameof(Song)} cannot have an empty {nameof(animalList)} when {nameof(AddAnimals)}");
+                throw new ArgumentException($"{nameof(Song)} cannot have an empty {nameof(checkingAnimalList)} when {nameof(AddAnimals)}");
             }
         }
         private bool IsEmpty(IEnumerable<object> list) =>
-            !animalList.Any();
+            !list.Any();
     }
 }

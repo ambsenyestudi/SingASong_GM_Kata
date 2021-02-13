@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Songs.SharedKernel\Songs.SharedKernel.csproj" />
+    <ProjectReference Include="..\Songs.SharedKernel\SingASong.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>

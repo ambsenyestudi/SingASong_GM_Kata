@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Songs.SharedKernel
+namespace SingASong.SharedKernel
 {
     public class AnimalRhyme : ValueObject
     {

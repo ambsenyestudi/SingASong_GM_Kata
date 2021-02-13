@@ -10,8 +10,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SingASong.Domain\SingASong.Domain.csproj" />
     <ProjectReference Include="..\Song.Sections\Song.Sections.csproj" />
-    <ProjectReference Include="..\Songs.SharedKernel\Songs.SharedKernel.csproj" />
+    <ProjectReference Include="..\Songs.SharedKernel\SingASong.SharedKernel.csproj" />
   </ItemGroup>
 
 </Project>
