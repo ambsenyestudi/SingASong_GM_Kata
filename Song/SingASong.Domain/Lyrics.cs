@@ -51,11 +51,9 @@ namespace SingASong.Domain
                     : Section.Create(processingAnimalList, currRhyme);
                 sectionList.Add(currSection);
             }
-            
+            sectionList.Add(new ClosingSection(animalCollection.Last()));
             var sectionSentenceList = GetSectionsSentences(sectionList);
-            var joinedSections = string.Join("\n", sectionSentenceList);
-            joinedSections += "\n" + new LyricsEnding(animalCollection.Last()).Value;
-            return joinedSections;
+            return string.Join("\n", sectionSentenceList);
         }
 
 
