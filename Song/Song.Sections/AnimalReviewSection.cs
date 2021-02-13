@@ -11,25 +11,24 @@ namespace Song.Sections
         {
             this.animalCollection = animalCollection;
         }
-        public override string ToString()
+        public List<string> GetSentences()
         {
-            var result = string.Empty;
-
+            var result = new List<string>();
             var count = animalCollection.Count - 1;
             var isPreciding = animalCollection.Count > 1;
 
             while (isPreciding && count > 0)
             {
                 var currAnimal = animalCollection[count];
-                var currSentence = result == string.Empty
-                    ? GetSwallowedAnimalToCatchPreviousAnimal(currAnimal)
-                    : "\n" + GetSwallowedAnimalToCatchPreviousAnimal(currAnimal);
-                result += currSentence;
+                result.Add(GetSwallowedAnimalToCatchPreviousAnimal(currAnimal));
                 count--;
                 isPreciding = HasPredecessors(animalCollection[count]);
             }
             return result;
         }
+        public override string ToString() =>
+            string.Join(",", GetSentences());
+
         private bool HasPredecessors(string animal) =>
             animal != animalCollection.First();
         private string GetSwallowedAnimalToCatchPreviousAnimal(string animal)

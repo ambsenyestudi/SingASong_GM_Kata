@@ -27,10 +27,16 @@ namespace SingASong.Domain
 
         public string ComposeSong()
         {
-            var joinedSections = GetStart();
+            
             var composingAnimals = animalCollection
                 .Take(animalCollection.Count - 1)
                 .ToList();
+
+            var sectionList = new List<Section>()
+            {
+                GetOpening()
+            };
+
             for (int i = 1; i < composingAnimals.Count; i++)
             {
                 var animal = composingAnimals[i];
@@ -43,18 +49,23 @@ namespace SingASong.Domain
                 var currSection = currRhyme.Equals(animalRymeList.First())
                     ? Section.Create(processingAnimalList, currRhyme, ".")
                     : Section.Create(processingAnimalList, currRhyme);
-                joinedSections += "\n" + currSection.Value;
+                sectionList.Add(currSection);
             }
+            
+            var sectionSentenceList = GetSectionsSentences(sectionList);
+            var joinedSections = string.Join("\n", sectionSentenceList);
             joinedSections += "\n" + new LyricsEnding(animalCollection.Last()).Value;
             return joinedSections;
         }
 
 
-        public string GetStart()
+        public Section GetOpening()
         {
             var firstAnimal = animalCollection.First();
-            return Section.Create(firstAnimal)
-                .Value;
+            return Section.Create(firstAnimal);
         }
+        private List<string> GetSectionsSentences(List<Section> sectionList) =>
+            sectionList.SelectMany(sec => sec.SentenceList)
+            .ToList();
     }
 }
