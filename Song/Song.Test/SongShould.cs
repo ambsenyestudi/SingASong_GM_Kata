@@ -3,6 +3,7 @@ using Songs.SharedKernel;
 using System;
 using System.Collections.Generic;
 using Xunit;
+using domain = SingASong.Domain;
 
 namespace Song.Test
 {
@@ -20,16 +21,19 @@ namespace Song.Test
                 "cow",
                 "horse"
             };
-            var rymeList = new List<AnimalRhyme>
+            var rhymeList = new List<AnimalRhyme>
             {
                 AnimalRhyme.CreatePresentTenseRhyme("bird", "How absurd to"),
                 AnimalRhyme.CreatePresentTenseRhyme("cat", "Fancy that to"),
                 AnimalRhyme.CreatePresentTenseRhyme("dog", "What a hog, to"),
                 AnimalRhyme.CreatePastTenseRhyme("cow", "I don't know how she")
             };
-            var lyrics = new Lyrics(animalCollection, rymeList);
-            var sut = new Lyrics(animalCollection, rymeList);
-            Approvals.Verify(sut.Song);
+            var songId = Guid.NewGuid();
+            var sut = new domain.Song(songId);
+            sut.AddAnimals(animalCollection);
+            sut.AddRhymes(rhymeList);
+            var result = sut.GetLyrics();   
+            Approvals.Verify(result);
         }
     }
 }

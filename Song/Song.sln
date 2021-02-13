@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Song", "Song\Song.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Song.Test", "Song.Test\Song.Test.csproj", "{4FB0A109-A516-49CC-8BD1-04FD3C187B8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Song.Sections", "Song.Sections\Song.Sections.csproj", "{0C9B01FF-63C0-4826-B761-8C861EF42B2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Song.Sections", "Song.Sections\Song.Sections.csproj", "{0C9B01FF-63C0-4826-B761-8C861EF42B2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Songs.SharedKernel", "Songs.SharedKernel\Songs.SharedKernel.csproj", "{1E470907-A11B-4F0A-9C55-8C69D8AF7A5B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Songs.SharedKernel", "Songs.SharedKernel\Songs.SharedKernel.csproj", "{1E470907-A11B-4F0A-9C55-8C69D8AF7A5B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingASong.Domain", "SingASong.Domain\SingASong.Domain.csproj", "{C948DEF2-0F89-4FB1-8D69-670BE4362936}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{1E470907-A11B-4F0A-9C55-8C69D8AF7A5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E470907-A11B-4F0A-9C55-8C69D8AF7A5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E470907-A11B-4F0A-9C55-8C69D8AF7A5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C948DEF2-0F89-4FB1-8D69-670BE4362936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C948DEF2-0F89-4FB1-8D69-670BE4362936}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C948DEF2-0F89-4FB1-8D69-670BE4362936}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C948DEF2-0F89-4FB1-8D69-670BE4362936}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
